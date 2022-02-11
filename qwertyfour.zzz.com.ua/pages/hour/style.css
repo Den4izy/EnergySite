@@ -1,0 +1,41 @@
+*{
+   margin: 0;
+}
+body{
+    background: #87CEEB;
+    /* 
+    background-image: url(./images/fone.jpg);
+    background-repeat: space;
+    */
+}
+
+table {
+    margin: auto;
+    background: #87CEFA;
+   }
+td{
+    border: 1px solid black;
+
+}
+.hour{
+    color: blue;
+   
+}
+#divForm{
+    background: green;
+    height: 20px;
+    padding: 10px;
+    padding-left: 50px;
+}
+.tableName{
+    background: DeepSkyBlue;
+    text-align: center;
+    font-weight: 900;
+}
+.tableError{
+    color:red;
+}
+.letter{
+    color: red;
+    font-weight: 900;
+}	

@@ -1,0 +1,77 @@
+#bod{
+    margin: 0 auto;
+    width: 70%;
+    background-color: thistle;
+    background-color:rgb(215, 235, 243);
+   
+}
+.unit{
+   
+    font-size: 20pt;
+    font-family: sans-serif;
+    margin-bottom: 5px;
+    width: 100%;
+    display: flex;
+    background-color:rgb(215, 235, 243);
+    
+}
+
+.name{
+
+   
+    font-size: 12pt;
+    font-family: sans-serif;
+    width: 80px;
+    min-width: 80px;
+    border-radius: 5px 0 0 5px;
+}
+.power{
+
+    
+    
+    font-size: 12pt;
+    font-family: sans-serif;
+    width: 50px;
+    min-width: 50px;
+    font-weight: 900;
+}
+.contScall{
+   width: 100%;
+
+}
+.scall{
+
+    background-color:rgb(215, 235, 243);
+    background-color: rgb(120, 247, 62);
+    border-radius: 0 5px 5px 0;
+    height: 100%;
+    animation-name: anim;
+    animation-duration: 2s;
+   
+}
+@keyframes anim{
+    from{
+        width: 0px;
+    }
+    to{
+        
+        
+    }
+}
+#sum{
+
+    background-color: green;
+    background-color: tomato;
+    border-radius: 5px;
+    font-size: 16pt;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+   
+}
+@media screen and (max-width: 600px) {
+    #bod {
+        width: 95%;
+    }
+  }	
