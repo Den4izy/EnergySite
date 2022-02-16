@@ -13,6 +13,10 @@ td{
     margin: 0px;
    
 }
+#text, #text2, #tes{
+    background: #FFFFB5;
+    font-family: sans-serif;
+}
 .clMaroon, .clMaroon2v, .clMaroon2n{
     background-color: #800000;
 }

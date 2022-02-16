@@ -17,6 +17,42 @@ for(let i = 1;i < stations.length;i++){
     tes.innerHTML +=  '<option value="' + stations[i] + '">' + stations[i] + '</option>';    
 }
 tes.innerHTML += ' </select>';
+
+let startConstDate = '2022-01-07';
+let endConstDate = curentDateMinus();
+
+text.value = startConstDate;
+text.min = startConstDate;
+text.max = endConstDate;
+text2.value = startConstDate;
+text2.min = startConstDate;
+text2.max = endConstDate;
+
+
+function dat1(){
+    text2.min = text.value;
+    let D1 = new Date(text2.min);
+    let D2 = new Date(text2.value);
+    console.log(D1);
+    console.log(D2);
+    if(D2 <= D1){
+        text2.value = text2.min
+        console.log('ok');
+    }
+}
+function dat2(){
+     text.max = text2.value;
+     let D1 = new Date(text.max);
+     let D2 = new Date(text.value);
+     if(D1 <= D2){
+        text.value = text.max
+        console.log('ok');
+     }
+}
+
+
+
+
 //стартова ф-я реалізується кнопкою
 function go() {
     //створюємо запрос
@@ -25,6 +61,15 @@ function go() {
     let resTes = tes.value;
     let resStart = text.value;
     let resEnd = text2.value;
+let re = /-/gi;
+resStart = resStart.replace(re, '.');
+resStart = convertDataJ(resStart);
+resEnd = resEnd.replace(re, '.');
+resEnd = convertDataJ(resEnd);
+
+
+   
+
  
     //ініціалізуємо масів для запроса з метода, який формує масів діапазона дат кожного місяця 
     let ArrZ = forZapros(resStart, resEnd);
@@ -47,6 +92,8 @@ function go() {
         xht.send();
     }
     //визиваємо ф-ю з параметрами загальним отриманим масівом та назвою станції
+   
+
     func(arrFull, resTes)
 }
 
@@ -54,6 +101,7 @@ function go() {
 function func(data, tes) {
     //вхідний масів
     Arr = data;
+
     //кінцевий масів
     let resArr = [];
     //кількість блоків
@@ -189,6 +237,7 @@ function createTable(arr, arr2, days) {
         }
     }
     //вертаємо результат ф=ї(текст таблиці)
+
     return resText;
 }
 
@@ -208,6 +257,7 @@ function transpose(a) {
 }
 //ф-я робить масів місяців з датами для шапки таблиці(початкова дата, кількість днів)
 function arrData(startData, da) {
+
     //кількість днів
     let days = da;
     //місяць
@@ -215,7 +265,8 @@ function arrData(startData, da) {
     //кінцевий масів
     let arrFull = [];
     //конвертуєму дату в правильний JS формат з чч.мм.рррр в рррр.мм.чч
-    let strData = convertData(startData);
+    let strData = startData;
+
     //встановлюємо дату початкового дня
     let D = new Date(strData);
     //витягуємо початковий місяць
@@ -281,10 +332,12 @@ function arrData(startData, da) {
         }
     }
     //вертаємо дані в ф-ю(результат ф-ї(масів), початкова дата)
+
     return createTableData(arrFull, strData);
 }
 //створює текст шапки таблиці з датами
 function createTableData(arr, startData) {
+   
     //кінцевий текст
     let = resText = '';
     //якщо масів не пустий
@@ -428,8 +481,26 @@ function daysInMonth(iMonth, iYear) {
     return 32 - new Date(iYear, iMonth, 32).getDate();
 }
 
+function curentDateMinus(){
+    let D = new Date();
+    D.setDate(D.getDate() - 1);
+    let day = D.getDate();
+    let month = D.getMonth();
+    month += 1;
+    let year = D.getFullYear();
+    if (day < 10) {
+        day = '0' + day;
+    }
+    if (month < 10) {
+        month = '0' + month;
+    }
+    let text = year + '-' + month + '-' + day;
+    return text;
+
+}
 
 
 
 
-	
+
+				
