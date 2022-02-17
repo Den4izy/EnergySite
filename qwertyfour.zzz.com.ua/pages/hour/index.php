@@ -18,8 +18,7 @@
 
 <body>
     <div id="divForm">
-        <input id="butPot" type="button" value="поточний" onClick="go(5)">
-        <input id="text" type="text" placeholder="чч.мм.рррр" title="чч.мм.рррр" value="">
+        <input id="text" type="date" value="2022-02-16">
         <input id="but" type="button" value="OK" onClick="go(4)">
         показувати години <input id="check" type="checkbox" checked>
     </div>

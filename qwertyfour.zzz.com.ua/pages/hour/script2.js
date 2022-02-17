@@ -1,5 +1,18 @@
 let container = document.querySelector('.container');
 let check = document.getElementById('check');
+let text = document.querySelector('#text');
+
+
+
+let startConstDate = '2022-01-07';
+let endConstDate = curentDate();
+
+text.value = endConstDate;
+text.min = startConstDate;
+text.max = endConstDate;
+
+
+
 function go(data) {
     let xht = new XMLHttpRequest();
 
@@ -18,9 +31,9 @@ function go(data) {
 
     }
     if (data == 4) {
-        let docTextTime = document.getElementById('text');
-        let res = docTextTime.value;
-
+        //let docTextTime = document.getElementById('text');
+        let res = text.value;
+        console.log(res);
         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
 
     }
@@ -46,6 +59,32 @@ function go(data) {
     }
     xht.send();
 }
+
+
+
+
+function curentDate(){
+    let D = new Date();
+    D.setDate(D.getDate() - 1);
+    let day = D.getDate();
+    let month = D.getMonth();
+    month += 1;
+    let year = D.getFullYear();
+    if (day < 10) {
+        day = '0' + day;
+    }
+    if (month < 10) {
+        month = '0' + month;
+    }
+    let text = year + '-' + month + '-' + day;
+    return text;
+
+}
+
+
+
+
+
 
 
 

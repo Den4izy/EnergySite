@@ -1,8 +1,14 @@
 let container = document.querySelector('.container');
 let check = document.getElementById('check');
+let text = document.querySelector('#text');
+let startConstDate = '2022-01-07';
+let endConstDate = curentDate();
+text.value = endConstDate;
+text.min = startConstDate;
+text.max = endConstDate;
+let res = '';
 function go(data) {
     let xht = new XMLHttpRequest();
-
     xht.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             func(this.responseText);
@@ -13,21 +19,16 @@ function go(data) {
     }
     if (data == 3) {
         let docTextTime = document.getElementById('text');
-        let res = docTextTime.value.split('_');
+        res = docTextTime.value.split('_');
         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=3&data=" + res[0] + "&time=" + res[1], true);
-
     }
     if (data == 4) {
-        let docTextTime = document.getElementById('text');
-        let res = docTextTime.value;
-        res = convertData(res);
-console.log(res);
-
+        res = text.value;
+        let re = /-/gi;
+        res = res.replace(re, '.');
         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
-
     }
     if (data == 5) {
-
         let dat = new Date();
         let day = dat.getDate();
         let month = dat.getMonth() + 1;
@@ -38,50 +39,51 @@ console.log(res);
         if (month < 10) {
             month = '0' + month;
         }
-
-        let res = year + "." + month + "." + day;
+        res = year + "." + month + "." + day;
         let res2 = day + "." + month + "." + year;
-
         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
         let docTextTime = document.getElementById('text');
         docTextTime.value = res2;
-
     }
     xht.send();
 }
 
 
+function convertDataJ(data) {
+    let arr = data.split('.');
+    arr.reverse();
+    let resData = arr[0] + '.' + arr[1] + '.' + arr[2];
+    return resData
+}
 
+
+function curentDate(){
+    let D = new Date();
+    D.setDate(D.getDate());
+    let day = D.getDate();
+    let month = D.getMonth();
+    month += 1;
+    let year = D.getFullYear();
+    if (day < 10) {
+        day = '0' + day;
+    }
+    if (month < 10) {
+        month = '0' + month;
+    }
+    let text = year + '-' + month + '-' + day;
+    return text;
+}
 
 function func(data) {
-    //console.log(data);
     Arr = JSON.parse(data);
-    //console.log(Arr);
-
-
-
-
     let Arr2 = [];
     for (let i = 0; i < Arr.length; i++) {
         Arr2[i] = arrOffAes(Arr[i]);
     }
-
-
-
-
     let Arr3 = [];
     for (let i = 0; i < Arr2.length; i++) {
         Arr3[i] = arrTes(Arr2[i]);
     }
-
-
-
-    //console.log(Arr2);
-    console.log(Arr3);
-    //Arr = arrOffAes(Arr);
-    //Arr = arrTes(Arr);
-
-
     container.innerHTML = out(Arr3);
 }
 
@@ -122,7 +124,7 @@ function out(arr) {
     let text = '<table>';
     text += '<tr class="tableName">';
     if (check.checked == true) {
-        text += '<td class="hour">Год.</td>';
+        text += '<td rowspan="1" class="hour">' + convertDataJ(res) + '</td>';
     }
     text += '<td colspan="3">ЛуТЕС</td>';
     text += '<td> </td><td> </td><td> </td>';
@@ -141,18 +143,47 @@ function out(arr) {
     text += '<td colspan="3">ДобТЕС</td>';
     text += '</tr>';
 
+
+
+    text += '<tr>';
+    if (check.checked == true) {
+         text += '<td class="legend">Години</td>';
+    }
+    for(let i = 1; i < 16; i++){
+        if(i == 2 || i == 4 || i == 7){
+             text += '<td> </td><td> </td><td> </td>';
+        }
+        else{
+              text += '<td class="legend">МВт</td><td class="legend">кількість блоків</td><td class="legend">№ блоків</td>';
+        }
+
+    }
+    text += '</tr>';
+
     if (arr.length == 0) {
         text += '<tr class="tableError"><td colspan="44">Дані відсутні. Можливо введений час був раніше 06.01.22р., або пізніше поточного часу. Також зверніть увагу на правильність формату заповнення(чч.мм.рррр)</td></tr></table>';
     }
     for (let iHour = 0; iHour < arr.length; iHour++) {
         let time = (iHour + 1) * 1;
         let error = false;
+
+
+        
+
+
+
+
         text += '<tr>';
         if (check.checked == true) {
             text += '<td class="hour">' + time + '</td>';
         }
         for (let i = 0; i < arr[iHour].length; i++) {
 
+        if(arr[iHour][i].length == 3){
+             text += '<td colspan="45" class="tableNone">Дані відсутні</td>';
+             break;  
+        }
+       
 
             if (i == 1) {
                 text += '<td> </td><td> </td><td> </td>';
@@ -165,7 +196,7 @@ function out(arr) {
                 text += '<td> </td><td> </td><td> </td>';
 
             }
-            text += '<td>' + arr[iHour][i][2] + '</td><td>';
+            text += '<td class="powerTable">' + arr[iHour][i][2] + '</td><td>';
             if (Number(arr[iHour][i][1])) {
 
 
@@ -257,4 +288,4 @@ function out(arr) {
     text += '</table>';
     return text;
 
-}									
+}										

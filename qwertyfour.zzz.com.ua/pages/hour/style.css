@@ -2,8 +2,8 @@
    margin: 0;
 }
 body{
-    background: #87CEEB;
-    /* 
+    /* background: #87CEEB;
+    
     background-image: url(./images/fone.jpg);
     background-repeat: space;
     */
@@ -11,14 +11,17 @@ body{
 
 table {
     margin: auto;
-    background: #87CEFA;
+    border-collapse: collapse;
+background: white;
    }
 td{
     border: 1px solid black;
+    text-align: center;
 
 }
 .hour{
-    color: blue;
+    color: black;
+     background: rgb(255 253 3);
    
 }
 #divForm{
@@ -28,7 +31,7 @@ td{
     padding-left: 50px;
 }
 .tableName{
-    background: DeepSkyBlue;
+    background: rgb(255 253 3);
     text-align: center;
     font-weight: 900;
 }
@@ -38,4 +41,20 @@ td{
 .letter{
     color: red;
     font-weight: 900;
-}	
+}
+.tableNone{
+    color: red;
+    text-align: center;
+    border: 2px solid red;
+}
+.powerTable{
+     background: rgb(246 218 217);
+}
+.legend{
+      writing-mode: vertical-rl;
+      text-align: center;
+      height: 100px;
+      font-family: Calibri;
+      background: rgb(216 228 192);
+
+}
