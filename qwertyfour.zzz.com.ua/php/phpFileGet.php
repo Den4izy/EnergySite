@@ -3,12 +3,13 @@
 header('Access-Control-Allow-Origin: *');
 
 $arrBlocksFull = array( 
-	array("РАЕС", 4 ),
+	array("РАЕС", 4),
 	array("ЗАЕС", 6),
 	array("ЮУАЕС", 3),
 	array("ХАЕС", 2),
 	array("ЛуТЕС", 6),
 	array("СлТЕС", 2),
+        array("МирТЕС", 2),
 	array("ВугТЕС", 7),
 	array("КуТЕС", 7),
 	array("КрТЕС", 8),
@@ -24,7 +25,21 @@ $arrBlocksFull = array(
 	array("ДобТЕС", 4)
 ); 
 
-$borgs=file_get_contents( "https://disp.ua.energy/Blocksf/" );
+
+$username = 'td';
+$password = 'Aa1234';
+ 
+$context = stream_context_create(array(
+    'http' => array(
+        'header'  => "Authorization: Basic " . base64_encode("$username:$password")
+    )
+));
+//$data = file_get_contents($url, false, $context);
+
+
+
+
+$borgs=file_get_contents( "https://www.de.com.ua/blocks2/auto_5m_blocks_bal15.jsp",false, $context );
 $text = iconv('WINDOWS-1251', 'UTF-8', $borgs);
 $testVar = $text;
 function stan($station){                                      //функція з пареметром назва станції
@@ -41,7 +56,7 @@ function stan($station){                                      //функція �
 					
 					
 	if($station == 'ДобТЕС'){
-	preg_match_all('#'.$arrBlocksFull[$countStation][0].'(.*?)<tr><td></td> <td></td>#', $text, $arrText);
+	preg_match_all('#'.$arrBlocksFull[$countStation][0].'(.*?)</TR>#', $text, $arrText);
 	}
 	else{
 		preg_match_all('#'.$arrBlocksFull[$countStation][0].'(.*?)'.$arrBlocksFull[$countStation + 1][0].'#', $text, $arrText); //обрізаємо текст даної станції
@@ -94,7 +109,11 @@ function stan($station){                                      //функція �
 			$arrBlock[0] = $k;
 			$arrBlock[1] = 'd';
 			preg_match_all('#<TR><TD class=(.*?)>#', $arrForTD[0][$i], $arrKorpusA);
-			$arrBlock[2] = $arrKorpusA[1][0];													//визначаємо стан корпусу А
+
+
+   $p = explode(" ", $arrKorpusA[1][0]);
+			$arrBlock[2] = $p[0];	
+                        //$arrBlock[2] = $arrKorpusA[1][0];											//визначаємо стан корпусу А
 			$i = $i + 1;
 
 			$boollWork = strripos($arrForTD[0][$i], 'class=nn');                                //Перевіряєм чи блок в роботі
@@ -112,7 +131,11 @@ function stan($station){                                      //функція �
 							
 
 			preg_match_all('#class=(.*?)>#', $arrForTD[0][$i], $arrKorpusB);
-			$arrBlock[4] = $arrKorpusB[1][0];                                                  	//визначаємо стан корпусу Б
+
+
+                        $p = explode(" ", $arrKorpusB[1][0]);
+			$arrBlock[4] = $p[0];  
+                        //$arrBlock[4] = $arrKorpusB[1][0];                                                	//визначаємо стан корпусу Б
 			$i = $i + 1;
 
 		}
@@ -122,10 +145,21 @@ function stan($station){                                      //функція �
 			$arrBlock[0] = $number;
 			$arrBlock[1] = 'm';
 			preg_match_all('#class=(.*?)>#', $arrForTD[0][$i], $arrPowerBlock3);
-			$arrBlock[2] = $arrPowerBlock3[1][0];												//визначаємо стан блока
+
+
+                        $p = explode(" ", $arrPowerBlock3[1][0]);
+			$arrBlock[2] = $p[0];
+                        //$arrBlock[2] = $arrPowerBlock3[1][0];												//визначаємо стан блока
 			$i = $i+1;
 							
 		}
+
+
+
+
+                             
+
+
 
 		array_push($ArrStation, $arrBlock);                                    					//добавляємо масів даних блока до загального масіва станції
 
@@ -133,6 +167,16 @@ function stan($station){                                      //функція �
 																						//виводим загальний масів як результат ф-ї
 
 	}
+        console.log($ArrStation);
+
+        if($station == 'ДобТЕС'){
+	
+	}
+        else{
+            $ArrStation = array_slice($ArrStation, 0, count($ArrStation) - 3); 
+        }
+
+
 	return $ArrStation; 
 
 				

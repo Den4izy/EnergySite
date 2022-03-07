@@ -29,7 +29,7 @@
 	else{
             $result2 = "This OK";
         }
-        $sql = "SELECT * FROM `StanBlocks` WHERE Time = '22:00' AND Date = '2022.02.16'";
+        $sql = "SELECT * FROM `StanBlocks` WHERE Time = '20:00' AND Date = '2022.02.19'";
 	$result = mysqli_query($link, $sql);
 	$result = mysqli_fetch_assoc($result);
 	$result = $result['Info'];

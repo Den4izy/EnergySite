@@ -1,6 +1,11 @@
 table{
     border: 2px solid black;
     border-collapse: collapse;
+   
+}
+.container{
+      transform: rotate3d(0);
+
 }
 td{
     border: 1px solid black;
@@ -28,6 +33,7 @@ td{
 }
 .py_n, .py_v, .inWork{
     background-color: greenyellow;
+    
 }
 .clTeal, .clTeal2v, .clTeal2n{
     background-color: #408080;

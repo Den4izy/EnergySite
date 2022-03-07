@@ -70,6 +70,7 @@ let docSum = document.getElementById('sum');
 function func(data) {
     fullArr = JSON.parse(data);
     let arrNorm = fullArr;
+    console.log(arrNorm);
     if (docBuTes.checked == false) {
         arrNorm = arrOffButes(arrNorm);
     }
