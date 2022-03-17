@@ -27,6 +27,7 @@ function go(data) {
         res = text.value;
         let re = /-/gi;
         res = res.replace(re, '.');
+console.log(res);
         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
     }
     if (data == 5) {
@@ -56,7 +57,7 @@ function convertDataJ(data) {
     return resData;
 }
 
-function curentDate(){
+function curentDate() {
     let D = new Date();
     D.setDate(D.getDate());
     let day = D.getDate();
@@ -74,7 +75,9 @@ function curentDate(){
 }
 
 function func(data) {
+console.log(data);
     let Arr = JSON.parse(data);
+
     let Arr2 = [];
     for (let i = 0; i < Arr.length; i++) {
         Arr2[i] = arrOffAes(Arr[i]);
@@ -138,14 +141,14 @@ function out(arr) {
     text += '</tr>';
     text += '<tr>';
     if (check.checked == true) {
-         text += '<td class="legend">Години</td>';
+        text += '<td class="legend">Години</td>';
     }
-    for(let i = 1; i < 16; i++){
-        if(i == 2 || i == 7){
-             text += '<td> </td><td> </td><td> </td>';
+    for (let i = 1; i < 16; i++) {
+        if (i == 2 || i == 7) {
+            text += '<td> </td><td> </td><td> </td>';
         }
-        else{
-              text += '<td class="legend">МВт</td><td class="legend">кількість блоків</td><td class="legend">№ блоків</td>';
+        else {
+            text += '<td class="legend">МВт</td><td class="legend">кількість блоків</td><td class="legend">№ блоків</td>';
         }
     }
     text += '</tr>';
@@ -161,39 +164,39 @@ function out(arr) {
         }
         for (let i = 0; i < arr[iHour].length; i++) {
 
-        if(arr[iHour][i].length == 3){
-             text += '<td colspan="45" class="tableNone">Дані відсутні</td>';
-             break;  
-        }
+            if (arr[iHour][i].length == 3) {
+                text += '<td colspan="45" class="tableNone">Дані відсутні</td>';
+                break;
+            }
             if (i == 1) {
                 text += '<td> </td><td> </td><td> </td>';
             }
-            
+
             if (i == 5) {
                 text += '<td> </td><td> </td><td> </td>';
             }
             text += '<td class="powerTable">' + arr[iHour][i][2] + '</td><td>';
 
             if (Number(arr[iHour][i][1])) {
-  
- 
+
+
                 if (arr[iHour][i][2] == 0) {
                     text += 0 + '</td><td>';
-                   
+
                 }
                 else {
                     text += arr[iHour][i][1] + '</td><td>';
-                   
- 
+
+
                 }
-            }else{
-                 if (arr[iHour][i][2] == 0) {
-                     text += 0 + '</td><td>';
-                 }
-                 else{
+            } else {
+                if (arr[iHour][i][2] == 0) {
+                    text += 0 + '</td><td>';
+                }
+                else {
                     let sp = arr[iHour][i][1].split('+');
                     text += Number(sp[1]) + Number(sp[0]) + '</td><td>';
-                 }        
+                }
             }
             if (arr[iHour][i][2] == 0) {
                 text += 0 + '</td>';
@@ -202,40 +205,40 @@ function out(arr) {
                 for (let k = 3; k < arr[iHour][i].length; k++) {
                     if (arr[iHour][i][k][1] == 'd') {
                         if (arr[iHour][i][k][2] == 'py_v' && arr[iHour][i][k][4] != 'py_n') {
-                            if(arr[iHour][i][k][3] == '0'){
-                                  text += '<span class="letter">' + arr[iHour][i][k][0] + 'А,</span>';
-                                  error = true;
+                            if (arr[iHour][i][k][3] == '0') {
+                                text += '<span class="letter">' + arr[iHour][i][k][0] + 'А,</span>';
+                                error = true;
                             }
-                            else{
-                                  text += arr[iHour][i][k][0] + 'А,';
+                            else {
+                                text += arr[iHour][i][k][0] + 'А,';
                             }
                         }
                         if (arr[iHour][i][k][2] != 'py_v' && arr[iHour][i][k][4] == 'py_n') {
-                            if(arr[iHour][i][k][3] == '0'){
-                                  text += '<span class="letter">' + arr[iHour][i][k][0] + 'Б,</span>';
-                                  error = true;
+                            if (arr[iHour][i][k][3] == '0') {
+                                text += '<span class="letter">' + arr[iHour][i][k][0] + 'Б,</span>';
+                                error = true;
                             }
-                            else{
-                                  text += arr[iHour][i][k][0] + 'Б,';
-                            }                    
+                            else {
+                                text += arr[iHour][i][k][0] + 'Б,';
+                            }
                         }
                         if (arr[iHour][i][k][2] == 'py_v' && arr[iHour][i][k][4] == 'py_n') {
-                           if(arr[iHour][i][k][3] == '0'){
-                                  text += '<span class="letter">' + arr[iHour][i][k][0] + '</span>' + ',';
-                                  error = true;
+                            if (arr[iHour][i][k][3] == '0') {
+                                text += '<span class="letter">' + arr[iHour][i][k][0] + '</span>' + ',';
+                                error = true;
                             }
-                            else{
-                                 text += arr[iHour][i][k][0] + ',';
+                            else {
+                                text += arr[iHour][i][k][0] + ',';
                             }
                         }
-                    } 
+                    }
                     else {
-                        if(arr[iHour][i][k][2] == '0'){
-                                  text += '<span class="letter">' + arr[iHour][i][k][0] + '</span>' + ',';
-                                  error = true;
+                        if (arr[iHour][i][k][2] == '0') {
+                            text += '<span class="letter">' + arr[iHour][i][k][0] + '</span>' + ',';
+                            error = true;
                         }
                         if (Number(arr[iHour][i][k][2])) {
-                             text += arr[iHour][i][k][0] + ',';
+                            text += arr[iHour][i][k][0] + ',';
                         }
                     }
                 }
@@ -243,11 +246,13 @@ function out(arr) {
             }
             text += '</td>';
         }
-        if(error == true){
+        if (error == true) {
             text += '<td><span class="letter">!!!</td>';
         }
         text += '</tr>';
     }
     text += '</table>';
+    text += '<div id="slava">Слава Україні!</div>';
+
     return text;
 }										

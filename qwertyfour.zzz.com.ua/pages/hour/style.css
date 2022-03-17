@@ -1,13 +1,7 @@
 *{
    margin: 0;
 }
-body{
-    /* background: #87CEEB;
-    
-    background-image: url(./images/fone.jpg);
-    background-repeat: space;
-    */
-}
+
 
 table {
     margin: auto;
@@ -26,9 +20,24 @@ td{
 }
 #divForm{
     background: green;
-    height: 20px;
+  
+    background: linear-gradient(to top, rgb(255 213 0) 50%, rgb(0 87 184) 50%);
+    height: 60px;
     padding: 10px;
     padding-left: 50px;
+}
+#rusK{
+    font-size: 16pt;
+    margin-left: 200px;
+    
+}
+#slava{
+   text-align: center;
+   font-size: 24pt;
+   font-style: italic;
+   color: rgb(0 87 184);
+   font-weight: bolder;
+    
 }
 .tableName{
     background: rgb(255 253 3);

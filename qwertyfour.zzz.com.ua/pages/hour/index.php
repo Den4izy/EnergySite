@@ -21,6 +21,7 @@
         <input id="text" type="date" value="2022-02-16">
         <input id="but" type="button" value="OK" onClick="go(4)">
         показувати години <input id="check" type="checkbox" checked>
+        <strong id="rusK">«Русский военный корабль, иди на хуй!»</strong>
     </div>
     <div class="mainTable">
           <div class="container">

@@ -1,6 +1,7 @@
 <?php
-
+header('Content-Type: text/html;charset=utf-8');
 header('Access-Control-Allow-Origin: *');
+
 
 $arrBlocksFull = array( 
 	array("РАЕС", 4),
@@ -211,6 +212,31 @@ function DBZapros($data, $time){
 	return $result;
 }
 
+
+function DBZaprosChange($info, $date, $time){
+	$link = mysqli_connect("localhost", "denysyz", "Wiwelden132435", "qwertyfour");
+        if ($link == false){
+            $result2 = "Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error();
+        }
+	else{
+            $result2 = "This OK";
+        }
+		$sql = 'UPDATE StanBlocks SET Info ="'.$info.'" WHERE Date ="'.$date.'"AND Time ="'.$time.'"';
+		$result = mysqli_query($link, $sql);
+	mysqli_close($link);   
+	return $result;
+}
+
+
+
+
+
+
+
+
+
+
+
 function DBZaprosDay($data){
 	$link = mysqli_connect("localhost", "denysyz", "Wiwelden132435", "qwertyfour");
 	$arr = array(); ;
@@ -374,6 +400,23 @@ if($_GET['act'] == '5'){
         //echo json_encode(DBZaprosDay($_GET['data']));
         //echo $_GET['data'].' + '.$_GET['time'];
         //echo json_encode(DBZaprosWork($_GET['data1'], $_GET['data2']));	
-}							
+}
+
+
+
+
+
+
+if($_GET['act'] == '6'){
+	echo DBZaprosChange($_GET['data1'], $_GET['data2'], $_GET['data3']);
+}
+
+
+
+
+
+
+
+							
 							
 ?>		
