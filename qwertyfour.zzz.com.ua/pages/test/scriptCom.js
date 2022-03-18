@@ -33,11 +33,10 @@ function dat1(){
     text2.min = text.value;
     let D1 = new Date(text2.min);
     let D2 = new Date(text2.value);
-    console.log(D1);
-    console.log(D2);
+  
     if(D2 <= D1){
         text2.value = text2.min
-        console.log('ok');
+       
     }
 }
 function dat2(){
@@ -46,7 +45,7 @@ function dat2(){
      let D2 = new Date(text.value);
      if(D1 <= D2){
         text.value = text.max
-        console.log('ok');
+       
      }
 }
 
@@ -61,11 +60,11 @@ function go() {
     let resTes = tes.value;
     let resStart = text.value;
     let resEnd = text2.value;
-let re = /-/gi;
-resStart = resStart.replace(re, '.');
-resStart = convertDataJ(resStart);
-resEnd = resEnd.replace(re, '.');
-resEnd = convertDataJ(resEnd);
+    let re = /-/gi;
+    resStart = resStart.replace(re, '.');
+    resStart = convertDataJ(resStart);
+    resEnd = resEnd.replace(re, '.');
+    resEnd = convertDataJ(resEnd);
 
 
    
@@ -73,9 +72,11 @@ resEnd = convertDataJ(resEnd);
  
     //ініціалізуємо масів для запроса з метода, який формує масів діапазона дат кожного місяця 
     let ArrZ = forZapros(resStart, resEnd);
+
     //масів для кінцевого результату де буде результат всьої ф-ї тобто 
     let arrFull = [];
     //в циклі виконуємо запрос для кожного діапазона дат та сумуємо це в один єдиний масів
+   
     for (let i = 0; i < ArrZ.length; i++) {
         //ф-я виконується при виконанні запроса
         xht.onreadystatechange = function () {
@@ -84,6 +85,7 @@ resEnd = convertDataJ(resEnd);
                 //сумуємо все в один масів і відразу конвертуємо його з JSON
                 // this.responseText це результат запроса
                 arrFull = arrFull.concat(JSON.parse(this.responseText));
+
             }
         }
         //параметри запроса
@@ -101,6 +103,19 @@ resEnd = convertDataJ(resEnd);
 function func(data, tes) {
     //вхідний масів
     Arr = data;
+
+ for (let iHour2 = 0; iHour2 < Arr.length;iHour2++) {
+     for (let iSt2 = 0; iSt2 < Arr[iHour2].length; iSt2++) {
+            //якщо станція знайдена
+            if (Arr[iHour2][iSt2][0] == 'МирТЕС') {
+                
+Arr[iHour2].splice(iSt2, 1);
+            }
+     }
+}
+
+
+
 
     //кінцевий масів
     let resArr = [];
@@ -332,7 +347,7 @@ function arrData(startData, da) {
         }
     }
     //вертаємо дані в ф-ю(результат ф-ї(масів), початкова дата)
-
+   
     return createTableData(arrFull, strData);
 }
 //створює текст шапки таблиці з датами
@@ -346,20 +361,31 @@ function createTableData(arr, startData) {
         let D = new Date(startData);
         //кількість днів
         let days = 0;
+        let days2 = 0;
         //початок таблиці та нового рядка
         resText += '<table><tr>';
         //перша ячейка шапки(2х2)
         resText += '<td class="leftUpCorner" colspan="2" rowspan="2"></td>';
         //цикл по місяцям
+console.log(arr.length);
         for (let i = 0; i < arr.length; i++) {
             //кількість днів для розтягування ячейки по горизонталі(незнаю чому додаємо)
             days += arr[i].length;
+            days2 = arr[i].length;
+console.log('days ' + days); 
             //додаємо до дати 1 місяць
-            D.setMonth(D.getMonth() + i);
+            if(i == 0){
+                D.setMonth(D.getMonth());
+            }
+            else{
+                D.setMonth(D.getMonth() + 1);
+            }
+           
             //отримуємо номер місяця
+console.log('month ' + D.getMonth()); 
             let month = D.getMonth();
             //вписуємо назву місяця по готовому масіву з назвами і розтягуємо по горизонталі на кількімть днів
-            resText += '<td class="tdMonth" colspan="' + days + '">' + months[month] + '</td>';
+            resText += '<td class="tdMonth" colspan="' + days2 + '">' + months[month] + '</td>';
         }
         //закриваємо і відкриваємо новий рядок
         resText += '</tr><tr>';
@@ -503,4 +529,4 @@ function curentDateMinus(){
 
 
 
-				
+									

@@ -213,6 +213,27 @@ function DBZapros($data, $time){
 }
 
 
+
+
+function DBZapros2($data, $time){
+	$link = mysqli_connect("localhost", "denysyz", "Wiwelden132435", "qwertyfour");
+	$textZ = '';
+        if ($link == false){
+            $result2 = "Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error();
+        }
+	else{
+            $result2 = "This OK";
+        }
+        $sql = 'SELECT Info FROM StanBlocks2 WHERE Date="'.$data.'" AND Time="'.$time.'"';
+	$result = mysqli_query($link, $sql);
+	$result = mysqli_fetch_assoc($result);
+	$result = $result['Info'];
+	mysqli_close($link);
+        
+	return $result;
+}
+
+
 function DBZaprosChange($info, $date, $time){
 	$link = mysqli_connect("localhost", "denysyz", "Wiwelden132435", "qwertyfour");
         if ($link == false){
@@ -221,7 +242,7 @@ function DBZaprosChange($info, $date, $time){
 	else{
             $result2 = "This OK";
         }
-		$sql = 'UPDATE StanBlocks SET Info ="'.$info.'" WHERE Date ="'.$date.'"AND Time ="'.$time.'"';
+		$sql = 'UPDATE StanBlocks2 SET Info ="'.$info.'" WHERE Date ="'.$date.'"AND Time ="'.$time.'"';
 		$result = mysqli_query($link, $sql);
 	mysqli_close($link);   
 	return $result;
@@ -280,7 +301,7 @@ function DBZaprosWork($data1, $data2){
 	else{
             $result2 = "This OK";
         }
-        $sql = 'SELECT Info FROM StanBlocks WHERE Date BETWEEN"'.$data1.'"AND "'.$data2.'"AND Time ="'.$time1.'" OR Date BETWEEN"'.$data1.'"AND "'.$data2.'"AND Time ="'.$time2.'"';
+        $sql = 'SELECT DISTINCT Info FROM StanBlocks2 WHERE Date BETWEEN"'.$data1.'"AND "'.$data2.'"AND Time ="'.$time1.'" OR Date BETWEEN"'.$data1.'"AND "'.$data2.'"AND Time ="'.$time2.'"';
 
        
 
@@ -397,9 +418,7 @@ if($_GET['act'] == '4'){
 }
 if($_GET['act'] == '5'){
 	echo json_encode(createArrDay(DBZaprosWork($_GET['data1'], $_GET['data2'])));
-        //echo json_encode(DBZaprosDay($_GET['data']));
-        //echo $_GET['data'].' + '.$_GET['time'];
-        //echo json_encode(DBZaprosWork($_GET['data1'], $_GET['data2']));	
+       	
 }
 
 
@@ -409,6 +428,13 @@ if($_GET['act'] == '5'){
 
 if($_GET['act'] == '6'){
 	echo DBZaprosChange($_GET['data1'], $_GET['data2'], $_GET['data3']);
+}
+
+if($_GET['act'] == '7'){
+	echo json_encode(createArr(DBZapros2($_GET['data'], $_GET['time'])));
+        //echo $_GET['data'].' + '.$_GET['time'];
+        //echo DBZapros($_GET['data'], $_GET['time']);
+	
 }
 
 

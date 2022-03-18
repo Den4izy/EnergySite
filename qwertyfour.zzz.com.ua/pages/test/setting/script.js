@@ -30,7 +30,7 @@ function go(date) {
     if (date == 1) {
         let dataV = convertDataJ(data.value);
         let hourV = hour.value;
-        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=3&data=" + dataV + "&time=" + hourV, true);
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=7&data=" + dataV + "&time=" + hourV, true);
     }
 
     xht.send();

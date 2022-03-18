@@ -68,15 +68,13 @@ else {
     print("Соединение установлено успешно <br>");
 }
 
+
 $sql = 'INSERT INTO StanBlocks (Time, Date, Info) VALUES ("'.$time .'", "'.$date .'", "'.$str .'")';
-//$sql2 = 'SELECT * FROM testtable';
+$sql2 = 'INSERT INTO StanBlocks2 (Time, Date, Info) VALUES ("'.$time .'", "'.$date .'", "'.$str .'")';
 $result = mysqli_query($link, $sql);
+$result2 = mysqli_query($link, $sql2);
 
 print($str);
-
-
-
-
 
 
  ?>
