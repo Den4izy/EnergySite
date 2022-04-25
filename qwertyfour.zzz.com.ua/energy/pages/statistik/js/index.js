@@ -16,32 +16,36 @@ function go(dat) {
 
     if (dat == 1) {
 
-        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=1", true);
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/energy/php/phpFileGet.php?act=1", true);
         v = 1;
         timeStan.innerHTML = '';
     }
-    if (dat == 2) {
+    //if (dat == 2) {
 
-        xht.open("GET", "http://localhost/www/Projects/stanBlocksWork/php/phpFileGet.php?act=2", true);
-    }
+        //xht.open("GET", "http://localhost/www/Projects/stanBlocksWork/php/phpFileGet.php?act=2", true);
+    //}
     if (dat == 3) {
-        docTextTime = document.getElementById('textTime');
+        let docTextTime = document.getElementById('textTime');
+        let docTextDate = document.getElementById('textDate');
 
-        let res = docTextTime.value.split('_');
+        let time = docTextTime.value;
+        let date = docTextDate.value;
 
 
-        console.log(res[0]);
-        console.log(res[1]);
+        
 
-        console.log(docTextTime.value);
-
-        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=3&data=" + res[0] + "&time=" + res[1], true);
+        
+console.log(date);
+console.log(time);
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/energy/php/phpFileGet.php?act=3&data=" + convertDataJ(date) + "&time=" + time, true);
         v = 3;
-        if (docTextTime.value == '') {
-            timeStan.innerHTML = "Спробуй ще!";
+console.log(date);
+        if (date === '') {
+            timeStan.innerHTML = "Не вірна дата!";
         }
         else {
-            timeStan.innerHTML = 'Станом на ' + res[0] + ' ' + res[1];
+              
+            timeStan.innerHTML = 'Станом на ' + convertDataJ(date) + ' ' + time;
         }
 
     }
@@ -53,6 +57,14 @@ function go(dat) {
 }
 go(v);
 setInterval(time, 1000);
+
+
+
+function convertDataJ(data) {
+    let arr = data.split('-');
+    let resData = arr[0] + '.' + arr[1] + '.' + arr[2];
+    return resData
+}
 
 
 

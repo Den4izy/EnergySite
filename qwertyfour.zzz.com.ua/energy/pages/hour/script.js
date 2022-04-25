@@ -16,19 +16,19 @@ function go(data) {
         }
     };
     if (data == 1) {
-        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=1", true);
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/energy/php/phpFileGet.php?act=1", true);
     }
     if (data == 3) {
         let docTextTime = document.getElementById('text');
         res = docTextTime.value.split('_');
-        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=3&data=" + res[0] + "&time=" + res[1], true);
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/energy/php/phpFileGet.php?act=3&data=" + res[0] + "&time=" + res[1], true);
     }
     if (data == 4) {
         res = text.value;
         let re = /-/gi;
         res = res.replace(re, '.');
 console.log(res);
-        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/energy/php/phpFileGet.php?act=4&data=" + res, true);
     }
     if (data == 5) {
         let dat = new Date();
@@ -43,7 +43,7 @@ console.log(res);
         }
         res = year + "." + month + "." + day;
         let res2 = day + "." + month + "." + year;
-        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/energy/php/phpFileGet.php?act=4&data=" + res, true);
         let docTextTime = document.getElementById('text');
         docTextTime.value = res2;
     }
@@ -123,7 +123,8 @@ function out(arr) {
     if (check.checked == true) {
         text += '<td rowspan="1" class="hour">' + convertDataJ(res) + '</td>';
     }
-    text += '<td colspan="3">ЛуТЕС</td>';
+    
+    text += '<td> </td><td> </td><td> </td>';
     text += '<td> </td><td> </td><td> </td>';
     text += '<td colspan="3">СлТЕС</td>';
     text += '<td colspan="3">МирТЕС</td>';
@@ -144,7 +145,7 @@ function out(arr) {
         text += '<td class="legend">Години</td>';
     }
     for (let i = 1; i < 16; i++) {
-        if (i == 2 || i == 7) {
+        if (i == 1 || i == 2 || i == 7) {
             text += '<td> </td><td> </td><td> </td>';
         }
         else {
@@ -162,17 +163,20 @@ function out(arr) {
         if (check.checked == true) {
             text += '<td class="hour">' + time + '</td>';
         }
-        for (let i = 0; i < arr[iHour].length; i++) {
+        for (let i = 0; i < arr[iHour].length - 1; i++) {
 
             if (arr[iHour][i].length == 3) {
                 text += '<td colspan="45" class="tableNone">Дані відсутні</td>';
                 break;
             }
-            if (i == 1) {
+            if (i == 0) {
+                text += '<td> </td><td> </td><td> </td>';
                 text += '<td> </td><td> </td><td> </td>';
             }
-
-            if (i == 5) {
+            //if (i == 1) {
+                //text += '<td> </td><td> </td><td> </td>';
+            //}
+            if (i == 4) {
                 text += '<td> </td><td> </td><td> </td>';
             }
             text += '<td class="powerTable">' + arr[iHour][i][2] + '</td><td>';

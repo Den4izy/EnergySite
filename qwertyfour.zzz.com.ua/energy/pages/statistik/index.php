@@ -12,7 +12,8 @@
 
      <!--<link rel="stylesheet" href="./css/style.css"> -->
 
-     <link rel="stylesheet" type="text/css" href="http://qwertyfour.zzz.com.ua/pages/statistik/css/style.css?ts=<?=time()?>" /> 
+     <link rel="stylesheet" type="text/css" href="http://qwertyfour.zzz.com.ua/energy/pages/statistik/css/style.css?ts=<?=time()?>" /> 
+     <link rel="shortcut icon" href="./images/stat_icon.png" type="image/x-icon">
        
 
 
@@ -27,7 +28,8 @@
     <div id="time">
         <input id="butNow" type="button" value="Поточний" onclick="go(1)">
         
-        <input id="textTime" type="text" placeholder="дд:мм:гггг_чч:00" title="дд:мм:гггг_чч:00" value="">
+        <input id="textDate" type="date" value="" min="2022-01-07">
+        <input id="textTime" type="text"  value="" placeholder="чч:00">
         <input id="butOK" type="button" value="OK" onclick="go(3)">
         <div id="timeNow"></div>
         <div id="timeStan"></div>

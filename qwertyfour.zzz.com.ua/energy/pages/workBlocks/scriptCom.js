@@ -65,6 +65,7 @@ function go() {
     resStart = convertDataJ(resStart);
     resEnd = resEnd.replace(re, '.');
     resEnd = convertDataJ(resEnd);
+console.log(resEnd);
 
 
    
@@ -89,7 +90,7 @@ function go() {
             }
         }
         //параметри запроса
-        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=5&data1=" + ArrZ[i][0] + "&data2=" + ArrZ[i][1], false);
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/energy/php/phpFileGet.php?act=5&data1=" + ArrZ[i][0] + "&data2=" + ArrZ[i][1], false);
         //надсилання запроса
         xht.send();
     }
@@ -100,16 +101,24 @@ function go() {
 }
 
 //функція яка формує спец. масів по стану блоків конкретної станції
+
 function func(data, tes) {
     //вхідний масів
+    console.log(data);
     Arr = data;
+
+
+
+//Arr.splice(4, 0, 'drum');
+
+
 
  for (let iHour2 = 0; iHour2 < Arr.length;iHour2++) {
      for (let iSt2 = 0; iSt2 < Arr[iHour2].length; iSt2++) {
             //якщо станція знайдена
             if (Arr[iHour2][iSt2][0] == 'МирТЕС') {
                 
-Arr[iHour2].splice(iSt2, 1);
+                    Arr[iHour2].splice(iSt2, 1);
             }
      }
 }
@@ -367,12 +376,12 @@ function createTableData(arr, startData) {
         //перша ячейка шапки(2х2)
         resText += '<td class="leftUpCorner" colspan="2" rowspan="2"></td>';
         //цикл по місяцям
-console.log(arr.length);
+
         for (let i = 0; i < arr.length; i++) {
             //кількість днів для розтягування ячейки по горизонталі(незнаю чому додаємо)
             days += arr[i].length;
             days2 = arr[i].length;
-console.log('days ' + days); 
+
             //додаємо до дати 1 місяць
             if(i == 0){
                 D.setMonth(D.getMonth());
@@ -382,7 +391,7 @@ console.log('days ' + days);
             }
            
             //отримуємо номер місяця
-console.log('month ' + D.getMonth()); 
+
             let month = D.getMonth();
             //вписуємо назву місяця по готовому масіву з назвами і розтягуємо по горизонталі на кількімть днів
             resText += '<td class="tdMonth" colspan="' + days2 + '">' + months[month] + '</td>';

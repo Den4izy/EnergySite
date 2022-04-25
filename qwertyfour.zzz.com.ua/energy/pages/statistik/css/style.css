@@ -70,6 +70,11 @@
     width: 100%;
    
 }
+#timeStan{
+    color: red;
+    font-weight: 900;
+}
+    
 @media screen and (max-width: 600px) {
     #bod {
         width: 95%;

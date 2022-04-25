@@ -8,7 +8,7 @@ $arrBlocksFull = array(
 	array("ЗАЕС", 6),
 	array("ЮУАЕС", 3),
 	array("ХАЕС", 2),
-	array("ЛуТЕС", 6),
+	//array("ЛуТЕС", 6),
 	array("СлТЕС", 2),
         array("МирТЕС", 2),
 	array("ВугТЕС", 7),
