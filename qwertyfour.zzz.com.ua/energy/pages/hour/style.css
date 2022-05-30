@@ -2,11 +2,15 @@
    margin: 0;
 }
 
+body{
+    background-image: url(./images/11.jpg);
+}
 
 table {
     margin: auto;
     border-collapse: collapse;
-background: white;
+    background: white;
+    box-shadow: 10px 5px 5px yellow;
    }
 td{
     border: 1px solid black;
@@ -29,13 +33,14 @@ td{
 #rusK{
     font-size: 16pt;
     margin-left: 200px;
+    color: yellow;
     
 }
 #slava{
    text-align: center;
    font-size: 24pt;
    font-style: italic;
-   color: rgb(0 87 184);
+   color: yellow;
    font-weight: bolder;
     
 }
@@ -59,11 +64,29 @@ td{
 .powerTable{
      background: rgb(246 218 217);
 }
+.backGreen{
+     background: rgb(4 253 3);
+}
+.backOrange{
+     background: rgb(255 153 0);
+}
 .legend{
       writing-mode: vertical-rl;
       text-align: center;
       height: 100px;
       font-family: Calibri;
       background: rgb(216 228 192);
-
+}
+footer{
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background: rgb(0 87 184);
+}
+#aFooter{
+    color: rgb(255 213 0);
+    font-size: 24pt;
+    text-decoration: none;
 }

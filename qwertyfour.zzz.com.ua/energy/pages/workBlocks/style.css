@@ -1,3 +1,6 @@
+*{
+   margin: 0px;
+}
 table{
     border: 2px solid black;
     border-collapse: collapse;
@@ -44,7 +47,7 @@ td{
 .clSilver, .clSilver2v, .clSilver2n{
     background-color: gray;
 }
-.tdMonth{
+.tdMonth, .white{
     text-align: center;
     background-color: white;
 }
@@ -74,3 +77,17 @@ td{
 .textWhite{
     color: white;
 }
+footer{
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 40px;
+    background: rgb(0 87 184);
+}
+#aFooter{
+    color: rgb(255 213 0);
+    font-size: 24pt;
+    text-decoration: none;
+}	

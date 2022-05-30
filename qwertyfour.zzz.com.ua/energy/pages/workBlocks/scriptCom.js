@@ -104,12 +104,13 @@ console.log(resEnd);
 
 function func(data, tes) {
     //вхідний масів
-    console.log(data);
+    //console.log(data);
     Arr = data;
+console.log(Arr);
 
 
 
-//Arr.splice(4, 0, 'drum');
+
 
 
 
@@ -121,7 +122,19 @@ function func(data, tes) {
                     Arr[iHour2].splice(iSt2, 1);
             }
      }
-}
+  }
+
+
+  for(let iHour = 0; iHour < Arr.length; iHour++){
+     //console.log(Arr[iHour][4][0]);
+     if(Arr[iHour][4][0] == 'ЛуТЕС'){
+        console.log('delete LuTES');
+        Arr[iHour].splice(4, 1);
+     }
+
+  }
+
+console.log(Arr);
 
 
 
@@ -157,10 +170,53 @@ function func(data, tes) {
                             //вказуємо шо стан кожного блоку є масівом з днями
                             resArr[iBlock][iColl] = [];
                             //присоюємо стану блока стан по кожному дню
-                            resArr[iBlock][iColl][0] = Arr[x][iSt][iBlock + 3][2];
-                            resArr[iBlock][iColl][1] = Arr[x + 1][iSt][iBlock + 3][2];
-                            resArr[iBlock][iColl][2] = Arr[x][iSt][iBlock + 3][4];
-                            resArr[iBlock][iColl][3] = Arr[x + 1][iSt][iBlock + 3][4];
+
+console.log('Arr= ' + Arr[x+1][iSt].length);
+console.log('Cont= ' + Arr[x][iSt][iBlock + 3][2]);
+                            if(Arr[x][iSt].length == 3){
+                                resArr[iBlock][iColl][0] = 'white';
+                            }
+                            else{
+                                resArr[iBlock][iColl][0] = Arr[x][iSt][iBlock + 3][2];
+                            {
+                            if(Arr[x+1][iSt].length == 3){
+                                resArr[iBlock][iColl][1] = 'white';
+                            }
+                            else{
+                                resArr[iBlock][iColl][1] = Arr[x + 1][iSt][iBlock + 3][2];
+                            }
+ 
+
+
+                            if(Arr[x][iSt].length == 3){
+                                resArr[iBlock][iColl][2] = 'white';
+                            }
+                            else{
+                                resArr[iBlock][iColl][2] = Arr[x][iSt][iBlock + 3][4];
+                            {
+                            if(Arr[x+1][iSt].length == 3){
+                                resArr[iBlock][iColl][3] = 'white';
+                            }
+                            else{
+                                resArr[iBlock][iColl][3] = Arr[x + 1][iSt][iBlock + 3][4];
+                            }
+
+
+
+
+
+
+
+
+
+
+                            
+                            
+                            
+
+                            //resArr[iBlock][iColl][2] = Arr[x][iSt][iBlock + 3][4];
+
+                            //resArr[iBlock][iColl][3] = Arr[x + 1][iSt][iBlock + 3][4];
                             //переходимо на наступний день через 2 записа в масиві так як день це 2 години тобто 2 записа
                             x = x + 2;
                         }
@@ -538,4 +594,4 @@ function curentDateMinus(){
 
 
 
-									
+											

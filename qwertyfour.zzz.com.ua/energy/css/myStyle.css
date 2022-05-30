@@ -31,10 +31,7 @@ body{
 footer{
     position: absolute;
     bottom: 0;
-    width: 100%;
-    
-   
-    
+    width: 100%;  
 }
 .foot{
     border-radius: 10px 10px 0 0;

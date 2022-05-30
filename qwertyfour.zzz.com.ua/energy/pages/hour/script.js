@@ -7,7 +7,13 @@ text.value = endConstDate;
 text.min = startConstDate;
 text.max = endConstDate;
 let res = '';
+let classManevr = ''; // для визначення наявності маневру, являє собою клас комірки( якщо маневру не було то залишаємо пустим, при
+                      // при наявності маневру присвоюємо клас з відповідним кольором).
 
+
+//check.change = go(4);
+
+// ф-я яка спрацьовує при натисканні на кнопку(формує та відправляє запит на сервер)
 function go(data) {
     let xht = new XMLHttpRequest();
     xht.onreadystatechange = function () {
@@ -27,7 +33,7 @@ function go(data) {
         res = text.value;
         let re = /-/gi;
         res = res.replace(re, '.');
-console.log(res);
+
         xht.open("GET", "http://qwertyfour.zzz.com.ua/energy/php/phpFileGet.php?act=4&data=" + res, true);
     }
     if (data == 5) {
@@ -75,7 +81,7 @@ function curentDate() {
 }
 
 function func(data) {
-console.log(data);
+
     let Arr = JSON.parse(data);
 
     let Arr2 = [];
@@ -167,39 +173,70 @@ function out(arr) {
 
             if (arr[iHour][i].length == 3) {
                 text += '<td colspan="45" class="tableNone">Дані відсутні</td>';
+                
                 break;
             }
+            
             if (i == 0) {
                 text += '<td> </td><td> </td><td> </td>';
                 text += '<td> </td><td> </td><td> </td>';
             }
-            //if (i == 1) {
-                //text += '<td> </td><td> </td><td> </td>';
-            //}
+          
             if (i == 4) {
                 text += '<td> </td><td> </td><td> </td>';
             }
-            text += '<td class="powerTable">' + arr[iHour][i][2] + '</td><td>';
+            if(iHour != 0){
+                if(arr[iHour - 1][i][1] === ""){
+                    classManevr = '';
+                    text += '<td class="powerTable">' + arr[iHour][i][2] + '</td><td> ' + classManevr + '';
+                }
+                else{
+                    if(arr[iHour][i][1] > arr[iHour - 1][i][1]){
+                       classManevr = 'class="backGreen"';
+                       text += '<td class="backGreen">' + arr[iHour][i][2] + '</td><td ' + classManevr + '>';
+                    }
+                    else if(arr[iHour][i][1] < arr[iHour - 1][i][1]){
+                       classManevr = 'class="backOrange"';
+                       text += '<td class="backOrange">' + arr[iHour][i][2] + '</td><td ' + classManevr + '>';
+                    }
+                    else{
+                       classManevr = '';
+                       text += '<td class="powerTable">' + arr[iHour][i][2] + '</td><td> ' + classManevr + '';    
+                    }
+                }
+            }
+            else{
+                 //Вписуємо потужність
+                 classManevr = '';
+                 text += '<td class="powerTable">' + arr[iHour][i][2] + '</td><td ' + classManevr + '>';
+                
+            }
+
+           
 
             if (Number(arr[iHour][i][1])) {
+            // якщо кількысть блоків можливо перевести в число
 
-
+         
                 if (arr[iHour][i][2] == 0) {
-                    text += 0 + '</td><td>';
-
+                    // якщо потужність 0 то і кількість блоків вписуємо 0
+                    text += 0 + '</td><td ' + classManevr + '>';
                 }
                 else {
-                    text += arr[iHour][i][1] + '</td><td>';
-
-
+                    // добавляєм кількість блоків та замінюємо крапку на кому(якщо дані без +)
+                    text += arr[iHour][i][1].replace('.', ',') + '</td><td ' + classManevr + '>';
                 }
-            } else {
+            }
+            else {
                 if (arr[iHour][i][2] == 0) {
-                    text += 0 + '</td><td>';
+                // якщо потужність 0 то і кількість блоків вписуємо 0
+                    text += 0 + '</td><td ' + classManevr + '>';
                 }
                 else {
+                    //ділимо строку по + і сумуємо
                     let sp = arr[iHour][i][1].split('+');
-                    text += Number(sp[1]) + Number(sp[0]) + '</td><td>';
+                    //замінюємо крапку на кому
+                    text += (Number(sp[1]) + Number(sp[0])).toString().replace('.', ',') + '</td><td ' + classManevr + '>';
                 }
             }
             if (arr[iHour][i][2] == 0) {
@@ -259,4 +296,4 @@ function out(arr) {
     text += '<div id="slava">Слава Україні!</div>';
 
     return text;
-}										
+}											

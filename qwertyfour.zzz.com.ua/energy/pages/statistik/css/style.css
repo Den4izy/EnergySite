@@ -1,5 +1,12 @@
 #bod{
     margin: 0 auto;
+    width: 100%;
+    background-color: thistle;
+    background-color:rgb(215, 235, 243);
+   
+}
+#container{
+    margin: 0 auto;
     width: 70%;
     background-color: thistle;
     background-color:rgb(215, 235, 243);
@@ -79,4 +86,17 @@
     #bod {
         width: 95%;
     }
-  }	
+}
+footer{
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background: rgb(0 87 184);
+}
+#aFooter{
+    color: rgb(255 213 0);
+    font-size: 24pt;
+    text-decoration: none;
+}	
